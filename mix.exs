@@ -4,7 +4,10 @@ defmodule Issues.Mixfile do
   def project do
     [app: :issues,
      version: "0.0.1",
+     name: "Issues",
+     source_url: "https://github.com/yesmeck/issues",
      elixir: "~> 1.0",
+     escript: escript_config,
      deps: deps]
   end
 
@@ -12,7 +15,7 @@ defmodule Issues.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -25,6 +28,15 @@ defmodule Issues.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    []
+    [
+      { :httpoison, "~> 0.5.0" },
+      { :jsx, "~> 2.4.0" },
+      { :ex_doc, github: "elixir-lang/ex_doc" },
+      { :earmark, "~> 0.1.12" }
+    ]
+  end
+
+  def escript_config do
+    [ main_module: Issues.CLI ]
   end
 end
